@@ -1,0 +1,127 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3a8gvcv3b6c6"]
+
+[ext_resource type="Script" uid="uid://bq0bpdyahx1vx" path="res://scripts/card/card_battle.gd" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="3_j837j"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_r4cyd"]
+[ext_resource type="Texture2D" uid="uid://b0iq4c0qbj3a2" path="res://images/backgrounds/board deck_darker.png" id="3_sugp2"]
+
+[node name="main" type="Node2D"]
+texture_filter = 1
+
+[node name="BoardDeckDarker" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0.26561165, 2.3841858e-07)
+scale = Vector2(7.689791, 7.203317)
+texture = ExtResource("3_sugp2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+texture_filter = 1
+scale = Vector2(3.3956764, 3.47159)
+limit_enabled = false
+
+[node name="card_manager" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(-5, 0)
+script = ExtResource("2_tbgi4")
+
+[node name="enemy_cards_label" type="Label" parent="card_manager"]
+texture_filter = 1
+offset_left = 296.0
+offset_top = -226.0
+offset_right = 513.0
+offset_bottom = -183.0
+theme_override_fonts/font = ExtResource("3_r4cyd")
+theme_override_font_sizes/font_size = 24
+metadata/_edit_use_anchors_ = true
+
+[node name="hand_cards" type="Node2D" parent="card_manager"]
+texture_filter = 1
+position = Vector2(5, 0)
+
+[node name="EmptyCardSlot" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-454, -180)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot2" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-257.99997, -180)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot3" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-60.999996, -180)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot4" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(135, -180)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot5" type="Sprite2D" parent="card_manager/hand_cards"]
+position = Vector2(863, -180)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot6" type="Sprite2D" parent="card_manager/hand_cards"]
+position = Vector2(1046, -180)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot7" type="Sprite2D" parent="card_manager/hand_cards"]
+position = Vector2(1232, -180)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot8" type="Sprite2D" parent="card_manager/hand_cards"]
+position = Vector2(1410, -180)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot9" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-455.8, 165.90001)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot10" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-259.99997, 165.90001)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot11" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(-63.999996, 165.90001)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot12" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(132, 165.90001)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot13" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(342, -18)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot14" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(472, -18)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot15" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(342, 160)
+texture = ExtResource("3_j837j")
+
+[node name="EmptyCardSlot16" type="Sprite2D" parent="card_manager/hand_cards"]
+texture_filter = 1
+position = Vector2(472, 160)
+texture = ExtResource("3_j837j")

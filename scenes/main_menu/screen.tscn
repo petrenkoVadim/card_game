@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://cy2ygwwrqrdrb"]
+
+[ext_resource type="Texture2D" uid="uid://bcf3wb5vwuc7l" path="res://images/backgrounds/menu_background.png" id="1_a1gnr"]
+[ext_resource type="Script" uid="uid://cko2tk6ees2wx" path="res://scripts/menus/main_menu_buttons.gd" id="1_dop6f"]
+[ext_resource type="Texture2D" uid="uid://cw0gr4h2p7pgp" path="res://images/buttons/start_battle_button/start_button_calm.png" id="2_vnis4"]
+[ext_resource type="Texture2D" uid="uid://bgxjntqt02g3h" path="res://images/buttons/start_battle_button/start_button_pressed.png" id="3_dop6f"]
+[ext_resource type="Texture2D" uid="uid://god6ifuoscwl" path="res://images/buttons/card_deck_button/card_button_calm.png" id="3_ogx42"]
+[ext_resource type="Texture2D" uid="uid://bm7jygwane3ai" path="res://images/buttons/card_deck_button/card_button_pressed.png" id="4_ent1y"]
+[ext_resource type="Texture2D" uid="uid://dthc3q8gay148" path="res://images/buttons/start_battle_button/start_button_focused.png" id="5_cku58"]
+[ext_resource type="Texture2D" uid="uid://dlwt8ubkgna8k" path="res://images/buttons/card_deck_button/card_button_focused.png" id="5_epawu"]
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="5_mdbo8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdbo8"]
+atlas = ExtResource("2_vnis4")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_dop6f")
+
+[node name="MenuBackground" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 1.0000229)
+scale = Vector2(9, 5.1093755)
+texture = ExtResource("1_a1gnr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="battle_button" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = 110.0
+offset_top = -160.0
+offset_right = 380.76923
+offset_bottom = -72.0
+texture_normal = SubResource("AtlasTexture_mdbo8")
+texture_pressed = ExtResource("3_dop6f")
+texture_hover = ExtResource("5_cku58")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="card_deck" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = -372.0
+offset_top = -159.0
+offset_right = -101.230774
+offset_bottom = -71.0
+texture_normal = ExtResource("3_ogx42")
+texture_pressed = ExtResource("4_ent1y")
+texture_hover = ExtResource("5_epawu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="hand_cards" type="Node2D" parent="."]
+
+[node name="EmptyCardSlot" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(-453.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot2" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(-323.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot3" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(-193.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot4" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(-63.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot5" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(66.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot6" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(196.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot7" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(326.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[node name="EmptyCardSlot8" type="Sprite2D" parent="hand_cards"]
+texture_filter = 1
+position = Vector2(456.5, 200)
+texture = ExtResource("5_mdbo8")
+
+[connection signal="pressed" from="battle_button" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="card_deck" to="." method="_on_card_deck_pressed"]

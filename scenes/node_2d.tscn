@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0atx5cb4caul"]
+
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="1_6e84v"]
+
+[node name="empty_slot_scene" type="Node2D"]
+
+[node name="EmptyCardSlot" type="Sprite2D" parent="."]
+texture = ExtResource("1_6e84v")
+
+[node name="Labelamount" type="Label" parent="."]
+offset_left = 42.999996
+offset_top = 65.0
+offset_right = 92.99992
+offset_bottom = 103.63636
+scale = Vector2(0.3200006, 0.44)
