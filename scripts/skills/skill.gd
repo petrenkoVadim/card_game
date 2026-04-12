@@ -11,7 +11,8 @@ func _input(event):
 		if rect.has_point(mouse_pos):
 			emit_signal("skill_clicked",skill)
 			
-func setup_skill(data):
+func setup_skill(data,amount):
 	skill = data.name
 	$Sprite2D.texture = data.texture
+	$LabelAmount.text = str(amount)
 			

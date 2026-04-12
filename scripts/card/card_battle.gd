@@ -159,7 +159,7 @@ func perform_attack(attacker_idx,defender_idx,is_player):
 	await tween.finished
 	
 	defender_stats[defender_idx][1] -= attacker_stats[attacker_idx][0]
-	defender.health_display.set_stat(defender_stats[defender_idx][1])
+	defender.set_stat_script.stat(defender_stats[defender_idx][1],defender.health_display)
 	
 	if defender_stats[defender_idx][1] <= 0:
 		defender_cards[defender_idx] = ""

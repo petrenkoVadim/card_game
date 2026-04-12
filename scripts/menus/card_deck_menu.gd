@@ -26,11 +26,10 @@ var slised_dict = {}
 func dict_slise(i):
 	slised_dict.clear()
 	var keys = all_avaiable_cards.keys()
-	var index = i
-	while index < MAX_LENGTH_DECK_SIZE+i and index < keys.size():
-		var key = keys[index]
+	while i < MAX_LENGTH_DECK_SIZE+i and i < keys.size():
+		var key = keys[i]
 		slised_dict[key] = all_avaiable_cards[key]
-		index += 1
+		i += 1
 
 func _on_skill_selected(skill_id):
 	selected_skill_id = skill_id 
@@ -40,10 +39,11 @@ func _on_skill_selected(skill_id):
 
 func _on_chosing_skill_card(slot_index):
 	Global.hand_players_skills[slot_index] = selected_skill_id
-	var skill_index = Global.players_all_skills.find(selected_skill_id)
-	Global.players_all_skills[skill_index] = ""
+	all_avaiable_skills[selected_skill_id] -= 1
+		
+	if all_avaiable_skills[selected_skill_id] <= 0:
+		all_avaiable_skills.erase(selected_skill_id)
 	is_skill_card_chosing = false
-	# Оновлюємо візуал
 	draw_board()
 	
 func _on_card_clicked(card_id, location, slot_index):
@@ -70,14 +70,10 @@ func _on_card_clicked(card_id, location, slot_index):
 			all_avaiable_cards[card_id] += 1
 		else:
 			all_avaiable_cards[card_id] = 1
-	
 	draw_board()
 
 @onready var slots = $hand_cards.get_children()
-var index = 0
 func _ready() -> void:
-	var drawer_skill = draw_skills_script.new()
-	drawer_skill.instantiate_skills($skills_slots)
 	# Робимо так, щоб текстури були чіткими (Nearest)
 	get_viewport().canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
 	# При розтягуванні вікна все залишається піксельним
@@ -85,10 +81,12 @@ func _ready() -> void:
 	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
 	for slot in range(4,8):
 		slots[slot].hide()
+		
 	$hand_deck_up.hide()
 	$all_deck_left.hide()
 	get_cards_hash_map(Global.all_players_cards,all_avaiable_cards)
 	get_cards_hash_map(Global.players_all_skills,all_avaiable_skills)
+	print(all_avaiable_skills)
 	draw_board()
 	
 func draw_board():
@@ -99,6 +97,10 @@ func draw_board():
 	for slot in $all_avaiable_cards_slots.get_children():
 		for child in slot.get_children():
 			child.queue_free() 
+			
+	for slot in $skills_slots.get_children():
+		for child in slot.get_children():
+			child.queue_free()
 	
 	print(is_skill_card_chosing)
 	visible_buttons()	
@@ -107,6 +109,9 @@ func draw_board():
 	drawer_card.instantiate_hand_cards($hand_cards,Global.hand_players_cards,is_skill_card_chosing,"hand_deck")
 	drawer_card.instantiate_hand_cards($all_avaiable_cards_slots,slised_dict,false,"all_deck")
 	
+	var drawer_skill = draw_skills_script.new()
+	drawer_skill.instantiate_skills(all_avaiable_skills,$skills_slots)
+#buttons 
 func _on_hand_deck_down_pressed() -> void:
 	for slot in range(0,8):
 		if slot >= 4:
@@ -136,7 +141,6 @@ func visible_buttons():
 	else:
 		$all_deck_left.show()
 		
-
 func _on_all_deck_right_pressed() -> void:
 	if started_element+1 <= all_avaiable_cards.size()-MAX_LENGTH_DECK_SIZE:
 		started_element += 1	

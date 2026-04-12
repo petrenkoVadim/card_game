@@ -4,19 +4,19 @@ var card_name
 var damage
 var health
 
-var number_scene = preload("res://scenes/numbers_stats.tscn")
+var set_stat_script = preload("res://scripts/set_stat.gd").new()
+
+signal card_clicked(id)
+signal card_skill_clicked()
+
+var card_id = ""
+var is_skill_chosing
+var skill_list = preload("res://scripts/skills/skills_list.gd").new()
 
 var damage_display
 var health_display
 var amount_display
 
-signal card_clicked(id)
-signal card_skill_clicked(id)
-
-var card_id = ""
-var is_skill_chosing
-var skill_list = preload("res://scripts/skills/skills_list.gd").new()
-	
 func _input(event):
 	if not is_visible_in_tree() or not Global.can_interact:
 		return
@@ -39,6 +39,10 @@ func set_skill_slot(skill_id):
 		$skill_slot.hide()
 
 func setup(data, is_skill = false, location = null, amount = 0, id = "", skill_id = ""):
+	damage_display = $Sprite2D/LabelDamage
+	health_display = $Sprite2D/LabelHealth
+	amount_display = $Sprite2D/LabelAmount
+	
 	if location == "all_deck":
 		$skill_slot.hide()
 	elif skill_id == "":
@@ -47,7 +51,6 @@ func setup(data, is_skill = false, location = null, amount = 0, id = "", skill_i
 		set_skill_slot(skill_id)
 		
 	is_skill_chosing = is_skill
-	# Встановлюємо піксельну фільтрацію для всієї карти (успадковується дітьми)
 	self.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	$Sprite2D.visible = true 	
 	
@@ -56,28 +59,17 @@ func setup(data, is_skill = false, location = null, amount = 0, id = "", skill_i
 	damage = data.damage	
 	health = data.health
 
-	$LabelName.text = card_name
 	$Sprite2D.texture = data.texture
 	$Sprite2D.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	
-	damage_display = number_scene.instantiate()
-	add_child(damage_display)
-	damage_display.position = $LabelDamage.position
-	damage_display.set_stat(damage)
-
-	health_display = number_scene.instantiate()
-	add_child(health_display)
-	health_display.position = $LabelHealth.position
-	health_display.set_stat(health)
+	$Sprite2D/LabelName.text = card_name
+	
+	# Налаштування чіткості для всіх Label
+	for label in [$Sprite2D/LabelName, $Sprite2D/LabelDamage, $Sprite2D/LabelHealth, $Sprite2D/LabelAmount]:
+		label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	
+	set_stat_script.stat(damage, damage_display)
+	set_stat_script.stat(health, health_display)
 
 	if amount > 1:
-		amount_display = number_scene.instantiate()
-		add_child(amount_display)
-		amount_display.position = $LabelAmount.position
-		amount_display.z_index = 10  
-		amount_display.set_stat(amount)
-
-	# старі label можна сховати
-	$LabelDamage.visible = false
-	$LabelHealth.visible = false
-	$LabelAmount.visible = false
+		set_stat_script.stat(amount, amount_display)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg0p1qsqn5wej"]
+[gd_scene load_steps=5 format=3 uid="uid://bg0p1qsqn5wej"]
 
 [ext_resource type="Script" uid="uid://bqa14wt0enw7k" path="res://scripts/card/card.gd" id="1_d81rb"]
 [ext_resource type="Texture2D" uid="uid://ggnkct3ehk7b" path="res://images/cards/rohan_warrior.png" id="2_6u4wf"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_kg30u"]
 [ext_resource type="Texture2D" uid="uid://cbw340u2bilqk" path="res://images/skills/pixil-frame-0 (10).png" id="3_ktuci"]
 
 [node name="card" type="Node2D"]
@@ -10,31 +11,44 @@ script = ExtResource("1_d81rb")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6u4wf")
 
-[node name="LabelName" type="Label" parent="."]
+[node name="LabelName" type="Label" parent="Sprite2D"]
 visible = false
 offset_left = -16.0
 offset_top = -51.0
 offset_right = 24.0
 offset_bottom = -28.0
 
-[node name="LabelDamage" type="Label" parent="."]
-offset_left = 39.000004
-offset_top = 19.0
-offset_right = 79.0
-offset_bottom = 42.0
-scale = Vector2(0.40000308, 0.72000027)
-
-[node name="LabelHealth" type="Label" parent="."]
-offset_left = -30.0
-offset_top = 18.0
-offset_right = 19.999924
-offset_bottom = 56.636364
+[node name="LabelDamage" type="Label" parent="Sprite2D"]
+texture_filter = 1
+offset_left = 36.0
+offset_top = 13.0
+offset_right = 56.0
+offset_bottom = 48.0
 scale = Vector2(0.3200006, 0.44)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_kg30u")
+theme_override_font_sizes/font_size = 32
 
-[node name="LabelAmount" type="Label" parent="."]
-offset_top = 43.0
-offset_right = 16.0
-offset_bottom = 66.0
+[node name="LabelAmount" type="Label" parent="Sprite2D"]
+texture_filter = 1
+offset_left = 2.9999995
+offset_top = 46.999996
+offset_right = 15.499977
+offset_bottom = 69.0
+scale = Vector2(0.3200006, 0.44)
+theme_override_fonts/font = ExtResource("3_kg30u")
+theme_override_font_sizes/font_size = 32
+
+[node name="LabelHealth" type="Label" parent="Sprite2D"]
+texture_filter = 1
+offset_left = -32.0
+offset_top = 12.999999
+offset_right = -13.0
+offset_bottom = 46.0
+scale = Vector2(0.3200006, 0.44)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_kg30u")
+theme_override_font_sizes/font_size = 32
 
 [node name="skill_slot" type="Sprite2D" parent="."]
 position = Vector2(-44, 53.000004)

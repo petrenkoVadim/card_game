@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://by1rt25otlfws"]
+[gd_scene load_steps=4 format=3 uid="uid://by1rt25otlfws"]
 
 [ext_resource type="Script" uid="uid://d3lbf3oq4g047" path="res://scripts/skills/skill.gd" id="1_hfop6"]
+[ext_resource type="Texture2D" uid="uid://co6xk4ttmmm8r" path="res://images/skills/damage_bonus.png" id="2_sa76s"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_psqw3"]
 
 [node name="skill" type="Node2D"]
 script = ExtResource("1_hfop6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sa76s")
+
+[node name="LabelAmount" type="Label" parent="."]
+texture_filter = 1
+offset_left = 7.0
+offset_top = -2.0
+offset_right = 19.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("3_psqw3")
+theme_override_font_sizes/font_size = 16
