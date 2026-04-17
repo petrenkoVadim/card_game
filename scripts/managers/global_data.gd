@@ -2,6 +2,6 @@ extends Node
 
 var hand_players_cards = ["","","","","","","",""]
 var hand_players_skills = ["","","","","","","",""]
-var all_players_cards = ["warrior","S","S","A","A","B","B","B","warrior","S","warrior","O","O","O","M","K","K"]
-var players_all_skills = ["-1_hp_enemy","+5_hp","+1_damage","-1_hp_enemy","-1_hp_enemy","-1_hp_enemy","+1_damage","+1_damage","+1_damage","+1_damage"]
+var all_players_cards = {"S":2,"A":1,"warrior":4,"B":3,"O":2,"K":5}
+var players_all_skills = {"-1_hp_enemy":1,"+5_hp":4,"+1_damage":7}
 var can_interact = true

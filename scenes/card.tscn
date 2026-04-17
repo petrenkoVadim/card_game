@@ -9,6 +9,7 @@
 script = ExtResource("1_d81rb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_6u4wf")
 
 [node name="skill_slot" type="Sprite2D" parent="Sprite2D"]

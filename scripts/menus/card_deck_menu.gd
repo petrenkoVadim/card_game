@@ -7,28 +7,18 @@ var draw_skills_script = preload("res://scripts/skills/draw_skills.gd")
 var skill_scene = preload("res://scenes/skill.tscn")
 var card_scene = preload("res://scenes/card.tscn")
 
-var all_avaiable_cards = {}
-var all_avaiable_skills = {}
-
 var started_element = 0
 var selected_skill_id = ""
 var skill_card_chosen_id = "" 
 var is_skill_card_chosing = false
 
-func get_cards_hash_map(deck,dict):
-	for i in range(0,len(deck)):
-		if deck[i] in dict:
-			dict[deck[i]] += 1
-		else:
-			dict[deck[i]] = 1
-
 var slised_dict = {}
 func dict_slise(i):
 	slised_dict.clear()
-	var keys = all_avaiable_cards.keys()
+	var keys = Global.all_players_cards.keys()
 	while i < MAX_LENGTH_DECK_SIZE+i and i < keys.size():
 		var key = keys[i]
-		slised_dict[key] = all_avaiable_cards[key]
+		slised_dict[key] = Global.all_players_cards[key]
 		i += 1
 
 func _on_skill_selected(skill_id):
@@ -39,10 +29,10 @@ func _on_skill_selected(skill_id):
 
 func _on_chosing_skill_card(slot_index):
 	Global.hand_players_skills[slot_index] = selected_skill_id
-	all_avaiable_skills[selected_skill_id] -= 1
+	Global.players_all_skills[selected_skill_id] -= 1
 		
-	if all_avaiable_skills[selected_skill_id] <= 0:
-		all_avaiable_skills.erase(selected_skill_id)
+	if Global.players_all_skills[selected_skill_id] <= 0:
+		Global.players_all_skills.erase(selected_skill_id)
 	is_skill_card_chosing = false
 	draw_board()
 	
@@ -52,13 +42,14 @@ func _on_card_clicked(card_id, location, slot_index):
 		
 		if free_slot == -1:
 			return
-		if not all_avaiable_cards.has(card_id) or all_avaiable_cards[card_id] <= 0:
+		if not Global.all_players_cards.has(card_id) or Global.all_players_cards[card_id] <= 0:
 			return
 		Global.hand_players_cards[free_slot] = card_id
-		all_avaiable_cards[card_id] -= 1
+		print(card_id)
+		Global.all_players_cards[card_id] -= 1
 		
-		if all_avaiable_cards[card_id] <= 0:
-			all_avaiable_cards.erase(card_id)
+		if Global.all_players_cards[card_id] <= 0:
+			Global.all_players_cards.erase(card_id)
 	elif location == "hand_deck":
 		if card_id == "":
 			return
@@ -66,10 +57,10 @@ func _on_card_clicked(card_id, location, slot_index):
 		Global.hand_players_cards[slot_index] = ""
 		Global.hand_players_skills[slot_index] = ""
 		
-		if card_id in all_avaiable_cards:
-			all_avaiable_cards[card_id] += 1
+		if card_id in Global.all_players_cards:
+			Global.all_players_cards[card_id] += 1
 		else:
-			all_avaiable_cards[card_id] = 1
+			Global.all_players_cards[card_id] = 1
 	draw_board()
 
 @onready var card_slots = $hand_cards.get_children()
@@ -84,8 +75,7 @@ func _ready() -> void:
 		
 	$hand_deck_up.hide()
 	$all_deck_left.hide()
-	get_cards_hash_map(Global.all_players_cards,all_avaiable_cards)
-	get_cards_hash_map(Global.players_all_skills,all_avaiable_skills)
+	
 	draw_board()
 	
 func draw_board():
@@ -109,7 +99,7 @@ func draw_board():
 	drawer_card.instantiate_hand_cards($all_avaiable_cards_slots,slised_dict,false,"all_deck")
 	
 	var drawer_skill = draw_skills_script.new()
-	drawer_skill.instantiate_skills(all_avaiable_skills,$skills_slots)
+	drawer_skill.instantiate_skills(Global.players_all_skills,$skills_slots)
 
 #buttons 
 func _on_hand_deck_down_pressed() -> void:
@@ -131,7 +121,7 @@ func _on_hand_deck_up_pressed() -> void:
 		$hand_deck_down.show()
 
 func visible_buttons():
-	if all_avaiable_cards.size() <= MAX_LENGTH_DECK_SIZE or started_element+MAX_LENGTH_DECK_SIZE >= all_avaiable_cards.size():
+	if Global.all_players_cards.size() <= MAX_LENGTH_DECK_SIZE or started_element+MAX_LENGTH_DECK_SIZE >= Global.all_players_cards.size():
 		$all_deck_right.hide()
 	else:
 		$all_deck_right.show()
@@ -142,7 +132,7 @@ func visible_buttons():
 		$all_deck_left.show()
 		
 func _on_all_deck_right_pressed() -> void:
-	if started_element+1 <= all_avaiable_cards.size()-MAX_LENGTH_DECK_SIZE:
+	if started_element+1 <= Global.all_players_cards.size()-MAX_LENGTH_DECK_SIZE:
 		started_element += 1	
 	draw_board()
 

@@ -40,7 +40,7 @@ func curr_stats_initialize():
 	for index in range(MAX_DECK_SIZE):
 		var stats = CardDB.cards[player_cards[index]]
 		curr_stats_player.append({
-			"name":CardDB.cards[player_cards[index]],
+			"name":CardDB.cards[player_cards[index]].name,
 			"damage":stats.damage,
 			"health":stats.health,
 			"skill":Global.hand_players_skills[index],
@@ -49,7 +49,7 @@ func curr_stats_initialize():
 	for index in range(MAX_DECK_SIZE):
 		var stats = CardDB.cards[enemy_cards[index]]
 		curr_stats_enemy.append({
-			"name":CardDB.cards[enemy_cards[index]],
+			"name":CardDB.cards[enemy_cards[index]].name,
 			"damage":stats.damage,
 			"health":stats.health,
 			"skill":hand_enemys_skills[index],
@@ -116,7 +116,6 @@ func move_cards_left(card_deck, card_instances, stats_deck, is_player):
 	var deleted_cards_stats = []
 	
 	for i in range(card_deck.size()):
-		print(stats_deck[i])
 		if stats_deck[i].is_alive:
 			moved_card_deck.append(card_deck[i])
 			new_card_instances.append(card_instances[i])
