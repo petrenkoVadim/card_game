@@ -8,11 +8,12 @@ var skills = {
 	},
 	"+5_hp":{
 		"name":"+5_hp",
-		"heal":5,
+		"ability":{"heal":5},
 		"texture": preload("res://images/skills/hp_bonus.png")
 	},
 	"-1_hp_enemy":{
 		"name":"-1_hp_enemy",
+		"ability":{"kill":-1},
 		"texture": preload("res://images/skills/-1_hp_bonus.png")
 	}
 }

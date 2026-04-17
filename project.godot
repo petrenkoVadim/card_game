@@ -22,7 +22,6 @@ Global="*res://scripts/managers/global_data.gd"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
 
 [editor]
 

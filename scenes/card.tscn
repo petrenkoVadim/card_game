@@ -11,6 +11,11 @@ script = ExtResource("1_d81rb")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6u4wf")
 
+[node name="skill_slot" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-44, 53.000004)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_ktuci")
+
 [node name="LabelName" type="Label" parent="Sprite2D"]
 visible = false
 offset_left = -16.0
@@ -31,13 +36,13 @@ theme_override_font_sizes/font_size = 32
 
 [node name="LabelAmount" type="Label" parent="Sprite2D"]
 texture_filter = 1
-offset_left = 2.9999995
-offset_top = 46.999996
-offset_right = 15.499977
-offset_bottom = 69.0
+offset_left = 50.0
+offset_top = 62.0
+offset_right = 77.0
+offset_bottom = 109.0
 scale = Vector2(0.3200006, 0.44)
 theme_override_fonts/font = ExtResource("3_kg30u")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 50
 
 [node name="LabelHealth" type="Label" parent="Sprite2D"]
 texture_filter = 1
@@ -49,8 +54,3 @@ scale = Vector2(0.3200006, 0.44)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_kg30u")
 theme_override_font_sizes/font_size = 32
-
-[node name="skill_slot" type="Sprite2D" parent="."]
-position = Vector2(-44, 53.000004)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_ktuci")

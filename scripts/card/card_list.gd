@@ -3,7 +3,6 @@ extends Node
 var cards = {
 	"warrior":{
 		"name":"Warrior",
-		"skill":"",
 		"damage":5,
 		"health":10,
 		"texture": preload("res://images/cards/rohan_warrior.png")

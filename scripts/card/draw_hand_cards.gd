@@ -4,7 +4,8 @@ var card_scene = preload("res://scenes/card.tscn")
 var CardDB = preload("res://scripts/card/card_list.gd").new()
 
 func instantiate_hand_cards(hand_node, card_deck, is_skill_chosing = false, location = "hand_deck"):
-	if hand_node == null: return
+	if hand_node == null: 
+		return
 	
 	var slots = hand_node.get_children()
 	var keys = []
@@ -32,7 +33,7 @@ func instantiate_hand_cards(hand_node, card_deck, is_skill_chosing = false, loca
 					current_skill = Global.hand_players_skills[i]
 			
 			# Налаштування карти (передаємо skill_id останнім аргументом)
-			card_instance.setup(CardDB.cards[card_key], is_skill_chosing, location, amount, card_key, current_skill)
+			card_instance.setup(CardDB.cards[card_key], current_skill, is_skill_chosing, location, amount, card_key)
 			slot.add_child(card_instance)
 			
 			# Підключення сигналів

@@ -33,20 +33,20 @@ func _input(event):
 
 func set_skill_slot(skill_id):
 	if skill_id != "" and skill_id in skill_list.skills:
-		$skill_slot.texture = skill_list.skills[skill_id].texture
-		$skill_slot.show()
+		$Sprite2D/skill_slot.texture = skill_list.skills[skill_id].texture
+		$Sprite2D/skill_slot.show()
 	else:
-		$skill_slot.hide()
+		$Sprite2D/skill_slot.hide()
 
-func setup(data, is_skill = false, location = null, amount = 0, id = "", skill_id = ""):
+func setup(data,skill_id, is_skill = false, location = null, amount = 0, id = ""):
 	damage_display = $Sprite2D/LabelDamage
 	health_display = $Sprite2D/LabelHealth
 	amount_display = $Sprite2D/LabelAmount
 	
 	if location == "all_deck":
-		$skill_slot.hide()
+		$Sprite2D/skill_slot.hide()
 	elif skill_id == "":
-		$skill_slot.show()
+		$Sprite2D/skill_slot.show()
 	else:
 		set_skill_slot(skill_id)
 		

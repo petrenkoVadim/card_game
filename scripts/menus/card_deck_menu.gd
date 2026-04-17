@@ -72,7 +72,7 @@ func _on_card_clicked(card_id, location, slot_index):
 			all_avaiable_cards[card_id] = 1
 	draw_board()
 
-@onready var slots = $hand_cards.get_children()
+@onready var card_slots = $hand_cards.get_children()
 func _ready() -> void:
 	# Робимо так, щоб текстури були чіткими (Nearest)
 	get_viewport().canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
@@ -80,13 +80,12 @@ func _ready() -> void:
 	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
 	for slot in range(4,8):
-		slots[slot].hide()
+		card_slots[slot].hide()
 		
 	$hand_deck_up.hide()
 	$all_deck_left.hide()
 	get_cards_hash_map(Global.all_players_cards,all_avaiable_cards)
 	get_cards_hash_map(Global.players_all_skills,all_avaiable_skills)
-	print(all_avaiable_skills)
 	draw_board()
 	
 func draw_board():
@@ -111,22 +110,23 @@ func draw_board():
 	
 	var drawer_skill = draw_skills_script.new()
 	drawer_skill.instantiate_skills(all_avaiable_skills,$skills_slots)
+
 #buttons 
 func _on_hand_deck_down_pressed() -> void:
 	for slot in range(0,8):
 		if slot >= 4:
-			slots[slot].show()
+			card_slots[slot].show()
 		else:
-			slots[slot].hide()
+			card_slots[slot].hide()
 		$hand_deck_up.show()
 		$hand_deck_down.hide()
 			
 func _on_hand_deck_up_pressed() -> void:
 	for slot in range(0,8):
 		if slot < 4:
-			slots[slot].show()
+			card_slots[slot].show()
 		else:
-			slots[slot].hide()
+			card_slots[slot].hide()
 		$hand_deck_up.hide()
 		$hand_deck_down.show()
 
