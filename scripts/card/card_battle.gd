@@ -9,6 +9,7 @@ var turn = "player"
 
 var CardDB = preload("res://scripts/card/card_list.gd").new()
 var SkillDB = preload("res://scripts/skills/skills_list.gd").new()
+var curr_stats_instantiate_script = preload("res://scripts/stats_instantiate.gd").new()
 
 var curr_stats_player = []
 var curr_stats_enemy = []
@@ -34,28 +35,6 @@ func copy_updated_deck(deck, is_player):
 	for i in range(0, MAX_DECK_SIZE):
 		deck.append(cards[i])
 	
-func curr_stats_initialize():
-	curr_stats_player = []
-	curr_stats_enemy = []
-	for index in range(MAX_DECK_SIZE):
-		var stats = CardDB.cards[player_cards[index]]
-		curr_stats_player.append({
-			"name":CardDB.cards[player_cards[index]].name,
-			"damage":stats.damage,
-			"health":stats.health,
-			"skill":Global.hand_players_skills[index],
-			"is_alive":true
-			})
-	for index in range(MAX_DECK_SIZE):
-		var stats = CardDB.cards[enemy_cards[index]]
-		curr_stats_enemy.append({
-			"name":CardDB.cards[enemy_cards[index]].name,
-			"damage":stats.damage,
-			"health":stats.health,
-			"skill":hand_enemys_skills[index],
-			"is_alive":true
-			})
-		
 func is_deck_updated(card_deck, is_player):
 	var deck = player_cards if is_player else enemy_cards
 	if card_deck != deck:
@@ -64,11 +43,11 @@ func is_deck_updated(card_deck, is_player):
 	
 func _ready() -> void:
 	$enemy_cards_label.text = "enemys cards left:  %s" % [enemy_cards.size()]
+	curr_stats_instantiate_script.curr_stats_initialize(enemy_cards,hand_enemys_skills)
 	
 	copy_updated_deck(enemy_cards_updated,false)
 	copy_updated_deck(player_cards_updated,true)
 	
-	curr_stats_initialize()	# Спочатку ініціалізуємо статі
 	instantiate_hand_cards() # Потім створюємо карти, які вже можуть брати ці статі
 	
 	Global.can_interact = false

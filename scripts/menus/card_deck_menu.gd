@@ -6,11 +6,14 @@ var draw_cards_script = preload("res://scripts/card/draw_hand_cards.gd")
 var draw_skills_script = preload("res://scripts/skills/draw_skills.gd")
 var skill_scene = preload("res://scenes/skill.tscn")
 var card_scene = preload("res://scenes/card.tscn")
+var draw_bio_menu = preload("res://scripts/card_bio_draw.gd")
 
 var started_element = 0
 var selected_skill_id = ""
 var skill_card_chosen_id = "" 
 var is_skill_card_chosing = false
+var bio_card = ""
+var bio_card_skill = ""
 
 var slised_dict = {}
 func dict_slise(i):
@@ -27,6 +30,8 @@ func _on_skill_selected(skill_id):
 	print("Вибрано навичку: ", skill_id)
 	draw_board()
 
+	$card_bio.show()
+
 func _on_chosing_skill_card(slot_index):
 	Global.hand_players_skills[slot_index] = selected_skill_id
 	Global.players_all_skills[selected_skill_id] -= 1
@@ -35,7 +40,12 @@ func _on_chosing_skill_card(slot_index):
 		Global.players_all_skills.erase(selected_skill_id)
 	is_skill_card_chosing = false
 	draw_board()
-	
+
+func _on_bio_card_clicked(card_id,skill,_index):
+	bio_card = card_id
+	bio_card_skill = skill
+	draw_board()
+
 func _on_card_clicked(card_id, location, slot_index):
 	if location == "all_deck":
 		var free_slot = Global.hand_players_cards.find("")
@@ -72,12 +82,13 @@ func _ready() -> void:
 	get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
 	for slot in range(4,8):
 		card_slots[slot].hide()
-		
+	
+	$card_bio.hide()
 	$hand_deck_up.hide()
 	$all_deck_left.hide()
 	
 	draw_board()
-	
+
 func draw_board():
 	for slot in $hand_cards.get_children():
 		for child in slot.get_children():
@@ -97,6 +108,9 @@ func draw_board():
 	var drawer_card = draw_cards_script.new()
 	drawer_card.instantiate_hand_cards($hand_cards,Global.hand_players_cards,is_skill_card_chosing,"hand_deck")
 	drawer_card.instantiate_hand_cards($all_avaiable_cards_slots,slised_dict,false,"all_deck")
+	
+	var drawer_bio = draw_bio_menu.new()
+	drawer_bio.card_bio_draw(bio_card,$card_bio/card_bio_id,$card_bio/CardBio/heath_stat,$card_bio/CardBio/damage_stat,bio_card_skill,$card_bio)
 	
 	var drawer_skill = draw_skills_script.new()
 	drawer_skill.instantiate_skills(Global.players_all_skills,$skills_slots)

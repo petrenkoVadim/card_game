@@ -3,7 +3,7 @@ extends Node
 var card_scene = preload("res://scenes/card.tscn")
 var CardDB = preload("res://scripts/card/card_list.gd").new()
 
-func instantiate_hand_cards(hand_node, card_deck, is_skill_chosing = false, location = "hand_deck"):
+func instantiate_hand_cards(hand_node, card_deck, is_skill_chosing = false, location = "hand_deck",card_bio_id = ""):
 	if hand_node == null: 
 		return
 	
@@ -44,4 +44,6 @@ func instantiate_hand_cards(hand_node, card_deck, is_skill_chosing = false, loca
 			else:
 				if parent.has_method("_on_card_clicked"):
 					card_instance.connect("card_clicked", parent._on_card_clicked.bind(location, i))
+				if parent.has_method("_on_bio_card_clicked"):
+					card_instance.connect("card_bio_id_clicked",parent._on_bio_card_clicked.bind(i))
 					

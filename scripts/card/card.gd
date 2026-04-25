@@ -8,8 +8,10 @@ var set_stat_script = preload("res://scripts/set_stat.gd").new()
 
 signal card_clicked(id)
 signal card_skill_clicked()
+signal card_bio_id_clicked(id, skill_id)
 
 var card_id = ""
+var current_skill_id = ""
 var is_skill_chosing
 var skill_list = preload("res://scripts/skills/skills_list.gd").new()
 
@@ -20,18 +22,23 @@ var amount_display
 func _input(event):
 	if not is_visible_in_tree() or not Global.can_interact:
 		return
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.is_pressed():
 		var mouse_pos = $Sprite2D.get_local_mouse_position()
 		var rect = $Sprite2D.get_rect()
+		if event.button_index == MOUSE_BUTTON_LEFT:
 		
-		if rect.has_point(mouse_pos):
-			if is_skill_chosing == false:
-				print("Клікнули по карті: ", card_id)
-				emit_signal("card_clicked", card_id)
-			else:
-				emit_signal("card_skill_clicked")
+			if rect.has_point(mouse_pos):
+				if is_skill_chosing == false:
+					print("Клікнули по карті: ", card_id)
+					emit_signal("card_clicked", card_id)
+				else:
+					emit_signal("card_skill_clicked")
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if rect.has_point(mouse_pos):
+				emit_signal("card_bio_id_clicked", card_id, current_skill_id)
 
 func set_skill_slot(skill_id):
+	current_skill_id = skill_id
 	if skill_id != "" and skill_id in skill_list.skills:
 		$Sprite2D/skill_slot.texture = skill_list.skills[skill_id].texture
 		$Sprite2D/skill_slot.show()
