@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dl17ox0sy6aye"]
 
-[ext_resource type="Script" uid="uid://duv5bgkji2r1t" path="res://scripts/menus/card_deck_menu.gd" id="1_v4oer"]
-[ext_resource type="Texture2D" uid="uid://b0iq4c0qbj3a2" path="res://images/backgrounds/board deck_darker.png" id="2_roo3y"]
-[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_hk71l"]
-[ext_resource type="Texture2D" uid="uid://cstm8rb11mdhj" path="res://images/arrow.png" id="4_d6b52"]
-[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="5_sgn5u"]
-[ext_resource type="Texture2D" uid="uid://cbw340u2bilqk" path="res://images/skills/pixil-frame-0 (10).png" id="6_3vq14"]
-[ext_resource type="Texture2D" uid="uid://cv7yhcfaxey7m" path="res://images/cards/card_bio.png" id="7_roo3y"]
+[ext_resource type="Script" uid="uid://duv5bgkji2r1t" path="res://src/menus/card_deck_menu.gd" id="1_v4oer"]
+[ext_resource type="Texture2D" uid="uid://b0iq4c0qbj3a2" path="res://assets/textures/images/backgrounds/board deck_darker.png" id="2_roo3y"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://assets/fonts/LowresPixel-Regular.otf" id="3_hk71l"]
+[ext_resource type="Texture2D" uid="uid://cstm8rb11mdhj" path="res://assets/textures/images/buttons/arrow_button.png" id="4_d6b52"]
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://assets/textures/images/cards/empty_card_slot.png" id="5_sgn5u"]
+[ext_resource type="Texture2D" uid="uid://cbw340u2bilqk" path="res://assets/textures/images/skills/pixil-frame-0 (10).png" id="6_3vq14"]
+[ext_resource type="Texture2D" uid="uid://cv7yhcfaxey7m" path="res://assets/textures/images/cards/card_bio.png" id="7_roo3y"]
 
 [node name="CardDeckMenu" type="Node2D"]
 script = ExtResource("1_v4oer")

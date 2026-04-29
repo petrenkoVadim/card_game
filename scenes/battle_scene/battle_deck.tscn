@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3a8gvcv3b6c6"]
 
-[ext_resource type="Script" uid="uid://bq0bpdyahx1vx" path="res://scripts/card/card_battle.gd" id="2_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="3_j837j"]
-[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_r4cyd"]
-[ext_resource type="Texture2D" uid="uid://b0iq4c0qbj3a2" path="res://images/backgrounds/board deck_darker.png" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://bq0bpdyahx1vx" path="res://src/enteties/card/card_battle.gd" id="2_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://assets/textures/images/cards/empty_card_slot.png" id="3_j837j"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://assets/fonts/LowresPixel-Regular.otf" id="3_r4cyd"]
+[ext_resource type="Texture2D" uid="uid://b0iq4c0qbj3a2" path="res://assets/textures/images/backgrounds/board deck_darker.png" id="3_sugp2"]
 
 [node name="main" type="Node2D"]
 texture_filter = 1

@@ -1,16 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg0p1qsqn5wej"]
+[gd_scene load_steps=8 format=3 uid="uid://bg0p1qsqn5wej"]
 
-[ext_resource type="Script" uid="uid://bqa14wt0enw7k" path="res://scripts/card/card.gd" id="1_d81rb"]
-[ext_resource type="Texture2D" uid="uid://ggnkct3ehk7b" path="res://images/cards/rohan_warrior.png" id="2_6u4wf"]
-[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://images/LowresPixel-Regular.otf" id="3_kg30u"]
-[ext_resource type="Texture2D" uid="uid://cbw340u2bilqk" path="res://images/skills/pixil-frame-0 (10).png" id="3_ktuci"]
+[ext_resource type="Script" uid="uid://bqa14wt0enw7k" path="res://src/enteties/card/card.gd" id="1_d81rb"]
+[ext_resource type="Script" uid="uid://f8ed8507yy3m" path="res://src/enteties/card/card_data.gd" id="2_kg30u"]
+[ext_resource type="Script" uid="uid://cxvsln1v86xmq" path="res://src/enteties/card/card_visuals.gd" id="3_8w5pg"]
+[ext_resource type="FontFile" uid="uid://di6psyret4h22" path="res://assets/fonts/LowresPixel-Regular.otf" id="3_kg30u"]
+[ext_resource type="Texture2D" uid="uid://cbw340u2bilqk" path="res://assets/textures/images/skills/pixil-frame-0 (10).png" id="3_ktuci"]
+[ext_resource type="Script" uid="uid://dg1bndv7x2ltq" path="res://src/enteties/card/card_input.gd" id="7_8w5pg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvopj"]
+size = Vector2(113, 154)
 
 [node name="card" type="Node2D"]
 script = ExtResource("1_d81rb")
 
+[node name="Data" type="Node2D" parent="."]
+script = ExtResource("2_kg30u")
+
+[node name="Visuals" type="Node2D" parent="."]
+script = ExtResource("3_8w5pg")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_6u4wf")
 
 [node name="skill_slot" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-44, 53.000004)
@@ -40,7 +49,7 @@ texture_filter = 1
 offset_left = 50.0
 offset_top = 62.0
 offset_right = 77.0
-offset_bottom = 109.0
+offset_bottom = 112.0
 scale = Vector2(0.3200006, 0.44)
 theme_override_fonts/font = ExtResource("3_kg30u")
 theme_override_font_sizes/font_size = 50
@@ -55,3 +64,10 @@ scale = Vector2(0.3200006, 0.44)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_kg30u")
 theme_override_font_sizes/font_size = 32
+
+[node name="InputHandler" type="Area2D" parent="."]
+script = ExtResource("7_8w5pg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InputHandler"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_nvopj")

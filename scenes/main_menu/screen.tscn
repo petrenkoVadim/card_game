@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://cy2ygwwrqrdrb"]
 
-[ext_resource type="Texture2D" uid="uid://bcf3wb5vwuc7l" path="res://images/backgrounds/menu_background.png" id="1_a1gnr"]
-[ext_resource type="Script" uid="uid://cko2tk6ees2wx" path="res://scripts/menus/main_menu_buttons.gd" id="1_dop6f"]
-[ext_resource type="Texture2D" uid="uid://cw0gr4h2p7pgp" path="res://images/buttons/start_battle_button/start_button_calm.png" id="2_vnis4"]
-[ext_resource type="Texture2D" uid="uid://bgxjntqt02g3h" path="res://images/buttons/start_battle_button/start_button_pressed.png" id="3_dop6f"]
-[ext_resource type="Texture2D" uid="uid://god6ifuoscwl" path="res://images/buttons/card_deck_button/card_button_calm.png" id="3_ogx42"]
-[ext_resource type="Texture2D" uid="uid://bm7jygwane3ai" path="res://images/buttons/card_deck_button/card_button_pressed.png" id="4_ent1y"]
-[ext_resource type="Texture2D" uid="uid://dthc3q8gay148" path="res://images/buttons/start_battle_button/start_button_focused.png" id="5_cku58"]
-[ext_resource type="Texture2D" uid="uid://dlwt8ubkgna8k" path="res://images/buttons/card_deck_button/card_button_focused.png" id="5_epawu"]
-[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://images/cards/empty_card_slot.png" id="5_mdbo8"]
+[ext_resource type="Texture2D" uid="uid://bcf3wb5vwuc7l" path="res://assets/textures/images/backgrounds/menu_background.png" id="1_a1gnr"]
+[ext_resource type="Script" uid="uid://cko2tk6ees2wx" path="res://src/menus/main_menu_buttons.gd" id="1_dop6f"]
+[ext_resource type="Texture2D" uid="uid://cw0gr4h2p7pgp" path="res://assets/textures/images/buttons/start_battle_button/start_button_calm.png" id="2_vnis4"]
+[ext_resource type="Texture2D" uid="uid://bgxjntqt02g3h" path="res://assets/textures/images/buttons/start_battle_button/start_button_pressed.png" id="3_dop6f"]
+[ext_resource type="Texture2D" uid="uid://god6ifuoscwl" path="res://assets/textures/images/buttons/card_deck_button/card_button_calm.png" id="3_ogx42"]
+[ext_resource type="Texture2D" uid="uid://bm7jygwane3ai" path="res://assets/textures/images/buttons/card_deck_button/card_button_pressed.png" id="4_ent1y"]
+[ext_resource type="Texture2D" uid="uid://dthc3q8gay148" path="res://assets/textures/images/buttons/start_battle_button/start_button_focused.png" id="5_cku58"]
+[ext_resource type="Texture2D" uid="uid://dlwt8ubkgna8k" path="res://assets/textures/images/buttons/card_deck_button/card_button_focused.png" id="5_epawu"]
+[ext_resource type="Texture2D" uid="uid://tcsl0bvl5pvv" path="res://assets/textures/images/cards/empty_card_slot.png" id="5_mdbo8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mdbo8"]
 atlas = ExtResource("2_vnis4")
