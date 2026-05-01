@@ -43,6 +43,7 @@ func _on_card_clicked(card_data,source,idx):
 			apply_skill_to_card(idx)
 		else:
 			Global.hand_players_cards[idx] = ""
+			Global.hand_players_skills[idx] = ""
 			var arsenal_card_id = card_data["id"]
 			if Global.all_players_cards.has(arsenal_card_id):
 				Global.all_players_cards[arsenal_card_id] += 1

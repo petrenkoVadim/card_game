@@ -9,7 +9,7 @@ var stats: Dictionary = {
 	"is_alive": true,
 	"skill": "Unknown",
 	"texture": null,
-	"skill_texture":null
+	"skill_texture":null #!!!!
 }
 
 func setup(base_data: Dictionary):

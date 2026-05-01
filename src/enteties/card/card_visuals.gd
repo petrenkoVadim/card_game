@@ -8,6 +8,12 @@ class_name CardVisuals
 @onready var damage_label = owner.find_child("LabelDamage", true, false)
 @onready var amount_label = owner.find_child("LabelAmount", true, false)
 
+var empty_skill_texture: Texture2D
+
+func _ready() -> void:
+	if skill_slot:
+		empty_skill_texture = skill_slot.texture
+
 func update_view(card_id,data: Dictionary,location):
 	if name_label: name_label.text = data.get("name", "Unknown")
 	if hp_label: hp_label.text = str(data.get("health", 0))
@@ -25,6 +31,9 @@ func update_view(card_id,data: Dictionary,location):
 	if skill_slot:
 		if data.has("skill_texture") and data["skill_texture"]:
 			skill_slot.texture = data["skill_texture"]
+			skill_slot.show()
+		elif location == "hand":
+			skill_slot.texture = empty_skill_texture
 			skill_slot.show()
 		else:
 			skill_slot.hide()

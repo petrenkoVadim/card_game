@@ -27,10 +27,13 @@ func setup(card_id: String, base_data: Dictionary, source, card_idx, can_be_ckic
 	card_index = card_idx
 	is_can_interract = can_be_ckicked
 	
-	data.stats["skill"] = skill_id	
+	#data.stats["skill"] = skill_id	
 	data.stats["id"] = card_id
 	
 	if skill_id != "" and skill_id in SkillDB.skills:
+		var skill_instance = skill_scene.instantiate()
+		skill_instance.setup(skill_id, SkillDB.skills[skill_id],0)
+		data.stats["skill"] = skill_instance.data.stats
 		data.stats["skill_texture"] = SkillDB.skills[skill_id]["texture"]
 		
 	data.setup(base_data)

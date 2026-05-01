@@ -21,7 +21,6 @@ func instantiate_hand_cards(hand_node, card_deck, source):
 			break
 			
 		var card_key = cards[i]
-		print("card_key =", card_key)
 		if card_key != "" and card_key in CardDB.cards:
 			var slot = slots[i]
 			var card_instance = card_scene.instantiate()

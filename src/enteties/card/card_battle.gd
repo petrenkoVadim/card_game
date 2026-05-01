@@ -2,13 +2,14 @@ extends Node2D
 
 const CARDS_ON_BOARD = 4
 const MAX_DECK_SIZE = 8
-const TIME = 0.2
-const GLOBAL_TIME = 0.5
+const TIME = 0.5
+const GLOBAL_TIME = 0.2
 
 var turn = "player"
 
 var CardDB = preload("res://src/enteties/card/card_list.gd").new()
 var SkillDB = preload("res://src/enteties/skills/skills_list.gd").new()
+var card_scene = preload("res://scenes/card.tscn")
 
 var curr_stats_player = []
 var curr_stats_enemy = []
@@ -24,7 +25,6 @@ var player_cards_updated = []
 var enemy_card_instances = []
 var player_card_instances = []
 
-var card_scene = preload("res://scenes/card.tscn")
 
 var rest_y = 0
 var rest_x = 250
@@ -87,9 +87,10 @@ func instantiate_hand_cards():
 		player_card_instances.append(card_instance) 
 		curr_stats_player.append(card_instance.data.stats) 
 		player_index += 1
-	print(player_card_instances)
+	print(curr_stats_player)
 var index = 0
 var index_2 = 0
+@warning_ignore("unused_parameter")
 func move_cards_left(card_deck, card_instances, stats_deck, is_player):
 	var slots = $hand_cards.get_children()
 	var moved_card_deck = []
@@ -109,6 +110,7 @@ func move_cards_left(card_deck, card_instances, stats_deck, is_player):
 		moved_card_deck.append("")
 		new_card_instances.append(null)
 	
+	@warning_ignore("shadowed_variable")
 	var index = MAX_DECK_SIZE-len(deleted_cards_stats)
 	while index < 8:
 		moved_stats.append(stats_deck[index])
@@ -149,19 +151,20 @@ func get_nearest_first_card(deck):
 		survived_card_pos.append(i)
 	return survived_card_pos
 
-func use_skill_spell(attacker_card_stat,deffender_card_stat,att_idx,dff_idx,skill,stats):
-	if skill == "" or !SkillDB.skills.has(skill):
+@warning_ignore("unused_parameter")
+func use_skill_spell(attacker_card_stat,deffender_card_stat,att_idx,dff_idx,attacker_skill_stats,stats):
+	var skill_id = attacker_skill_stats.id
+	if skill_id == "" or !SkillDB.skills.has(skill_id):
 		return
 		
-	var ability = SkillDB.skills[skill].ability
-	
-	match skill:
+	var ability_stat = attacker_skill_stats.ability
+	match skill_id:
 		"+1_damage":
-			attacker_card_stat[att_idx].damage += ability.attack
+			attacker_card_stat[att_idx].damage += ability_stat["attack"]
 		"+5_hp":
-			attacker_card_stat[att_idx].health += ability.heal
-		"-1_hp_enemy":
-			deffender_card_stat[dff_idx].health += ability.kill
+			attacker_card_stat[att_idx].health += ability_stat["heal"]
+		#"-1_hp_enemy":
+			#deffender_card_stat[dff_idx].health += ability_stat[1]
 
 func perform_attack(attacker_idx,defender_idx,is_player):
 	var attacker_instances = player_card_instances if is_player else enemy_card_instances
@@ -178,21 +181,20 @@ func perform_attack(attacker_idx,defender_idx,is_player):
 	var original_pos = attacker.global_position 
 	var attack_target = defender.global_position
 
-	var attacker_skill = attacker_stats[attacker_idx].skill
-	
-	use_skill_spell(attacker_stats, defender_stats, attacker_idx, defender_idx, attacker_skill,attacker_stats)
+	if attacker_stats[attacker_idx].skill is Dictionary:
+		var attacker_skill_stats = attacker_stats[attacker_idx].skill
+		use_skill_spell(attacker_stats, defender_stats, attacker_idx, defender_idx, attacker_skill_stats,attacker_stats)	
 	
 	attacker.visuals.damage_label.text = str(attacker_stats[attacker_idx].damage)
 	attacker.visuals.hp_label.text = str(attacker_stats[attacker_idx].health)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(TIME).timeout
 	
 	attacker.z_index = 100
 	var tween = create_tween()
 	tween.tween_property(attacker, "global_position", attack_target, TIME).set_trans(Tween.TRANS_SINE)
 	await tween.finished
 	
-	defender_stats[defender_idx].health -= attacker_stats[attacker_idx].damage
-	defender.visuals.hp_label.text = str(defender_stats[defender_idx].health)
+	defender.apply_damage(attacker_stats[attacker_idx].damage)
 	
 	if defender_stats[defender_idx].health <= 0:
 		defender_cards[defender_idx] = ""
@@ -210,6 +212,7 @@ func perform_attack(attacker_idx,defender_idx,is_player):
 func card_battle():
 	var is_player = (turn == "player")
 	var attacker_stats = curr_stats_player if is_player else curr_stats_enemy
+	@warning_ignore("unused_variable")
 	var attacker_cards = player_cards if is_player else enemy_cards
 	var defender_cards = enemy_cards if is_player else player_cards
 	
@@ -227,6 +230,7 @@ func card_battle():
 		await perform_attack(i,target_idx,is_player)
 		
 func len_enemy_cards():
+	@warning_ignore("shadowed_global_identifier")
 	var len = 0
 	for card in enemy_cards:
 		if card != "":
